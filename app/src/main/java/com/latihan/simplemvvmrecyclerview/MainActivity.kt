@@ -12,7 +12,10 @@ import com.latihan.simplemvvmrecyclerview.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val mainActivityViewModel: MainActivityViewModel by viewModels()
+//    private val mainActivityViewModel: MainActivityViewModel by viewModels()
+
+    private val viewModel: PostViewModel by viewModels()
+    private lateinit var postAdapter: PostAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,13 +23,23 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter = BiodataAdapter(emptyList())
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.adapter = adapter
+//        val adapter = BiodataAdapter(emptyList())
+//        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+//        binding.recyclerView.adapter = adapter
+//
+//        mainActivityViewModel.biodata.observe(this, Observer {
+//            items ->
+//            adapter.updateItems(items)
+//        })
 
-        mainActivityViewModel.biodata.observe(this, Observer {
-            items ->
-            adapter.updateItems(items)
+        postAdapter = PostAdapter(emptyList())
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = postAdapter
+
+        viewModel.posts.observe(this, Observer { posts ->
+            postAdapter.updatePosts(posts)
         })
+
+        viewModel.fetchPosts()
     }
 }

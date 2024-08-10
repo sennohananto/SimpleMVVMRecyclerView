@@ -45,11 +45,13 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-//    implementation("androidx.recyclerview:recyclerview:1.3.1")
-//    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
-//    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
 
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 
+    // Logging Interceptor for Retrofit (Optional)
+    implementation(libs.logging.interceptor)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
