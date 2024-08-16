@@ -42,6 +42,8 @@ class MainActivity : AppCompatActivity() {
             userAdapter.users.clear()
             userAdapter.users.addAll(users)
             userAdapter.notifyDataSetChanged()
+
+            binding.swipeRefreshLayout.isRefreshing = false
         })
 
         viewModel.operationResult.observe(this, Observer { result ->
@@ -57,7 +59,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.fetchUsers()
+            binding.swipeRefreshLayout.isRefreshing = true
+        }
     }
 
     private fun showDeleteConfirmationDialog(user: User) {
